@@ -1,8 +1,8 @@
 from customtkinter import *
 from tkinter import *
 from tkinter import messagebox
-import connector
-import components.Image
+import gameshop.connector as connector
+import gameshop.components.Image as Image
 import traceback
 
 def static_user(win, padx, pady, user_id):
@@ -17,7 +17,7 @@ def static_user(win, padx, pady, user_id):
         username.configure(font=('Arial', 30))
         name = CTkLabel(show_user_frame, text=user[0]['name'])
         level = CTkLabel(show_user_frame, text=("level : " , user[0]['level']))
-        image = components.Image.showImage(show_user_frame, user[0]['image'], 5, 5)
+        image = Image.showImage(show_user_frame, user[0]['image'], 5, 5)
         username.pack(padx=5, pady=5)
         name.pack(padx=2, pady=2, anchor=W)
         level.pack(padx=2, pady=2, anchor=W)

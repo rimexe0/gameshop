@@ -1,8 +1,8 @@
 from customtkinter import *
 from tkinter import *
 from tkinter import messagebox
-import connector
-import components.Image
+import gameshop.connector as connector
+import gameshop.components.Image as Image
 
 
 class User(CTk):
@@ -17,7 +17,7 @@ class User(CTk):
         self.username.configure(font=('Arial', 30))
         self.name = CTkLabel(self.show_user_frame, text="select user")
         self.level = CTkLabel(self.show_user_frame, text="select user")
-        self.image = components.Image.showImage(self.show_user_frame, 5, 5)
+        self.image = Image.showImage(self.show_user_frame, 5, 5)
         # self.userComboBox(self.show_user_frame, 5, 5)
         self.username.pack(padx=5, pady=5)
         self.name.pack(padx=2, pady=2, anchor=W)

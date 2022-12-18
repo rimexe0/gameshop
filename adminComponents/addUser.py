@@ -1,5 +1,5 @@
 from customtkinter import *
-import connector
+import gameshop.connector as connector
 
 
 def userframe(win, padx, pady):
