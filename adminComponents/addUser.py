@@ -2,9 +2,9 @@ from customtkinter import *
 import gameshop.connector as connector
 
 
-def userframe(win, padx, pady):
+def frame(win, rowv, colv):
     add_user_frame = CTkFrame(win)
-    add_user_frame.pack( padx=padx, pady=pady,anchor=NE)
+    add_user_frame.grid( row=rowv, column=colv)
 
     def add_user():
         stored_procedure = "insert_user"
