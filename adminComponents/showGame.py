@@ -60,12 +60,12 @@ def game_achievements(win, game_id):
 def userpage_game(win, vrow, vcol, game):
     game_frame = CTkFrame(win, width=600, height=120, corner_radius=10)
     show_game_frame = CTkFrame(game_frame, corner_radius=10, width=600, height=120)
-    game_text = CTkFrame(show_game_frame, width=550, height=50, corner_radius=10)
+    game_text = CTkFrame(show_game_frame, width=450, height=50, corner_radius=10)
     game_achievements_frame = CTkFrame(show_game_frame, width=200, height=50, corner_radius=10)
 
     game_frame.grid(row=vrow, column=vcol)
     show_game_frame.place(x=0, y=0)
-    game_text.place(x=40, y=10)
+    game_text.place(x=140, y=10)
     game_achievements_frame.place(x=430, y=65)
 
     try:
@@ -76,8 +76,8 @@ def userpage_game(win, vrow, vcol, game):
         game_hours_played = CTkLabel(game_text, text=str(game['hours_played']) + " hours played")
         image = Image.showImage(show_game_frame, game['image'], 10, 10, 150, 150)
         game_name.place(x=0, y=0)
-        game_last_played.place(x=400, y=0)
-        game_hours_played.place(x=435, y=20)
+        game_last_played.place(x=300, y=0)
+        game_hours_played.place(x=335, y=20)
         game_achievements(game_achievements_frame, game['id'])
 
     except Exception as e:

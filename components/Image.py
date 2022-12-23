@@ -1,3 +1,4 @@
+import traceback
 from tkinter import *
 
 from PIL import Image, ImageTk
@@ -21,6 +22,7 @@ class showImage():
             self.label.place(x=padxv, y=padyv)
         except Exception as e:
             print("opening image failed : ", e)
+            print(traceback.format_exc())
 
     def changeImage(self, image):
         try:
@@ -31,3 +33,4 @@ class showImage():
             self.label.image = self.photo2
         except Exception as e:
             print("image change failed : ", e)
+            print(traceback.format_exc())
