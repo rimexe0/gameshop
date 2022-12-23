@@ -9,6 +9,8 @@ class showImage():
         self.win = win
         self.padxv = padxv
         self.padyv = padyv
+        self.sizew=sizew
+        self.sizeh=sizeh
         try:
 
             urllib.request.urlretrieve(image, "image.png")
@@ -23,7 +25,7 @@ class showImage():
     def changeImage(self, image):
         try:
             urllib.request.urlretrieve(image, "image.png")
-            self.photo = Image.open("image.png").resize((100, 100))
+            self.photo = Image.open("image.png").resize((self.sizew, self.sizeh))
             self.photo2 = ImageTk.PhotoImage(self.photo)
             self.label.configure(image=self.photo2)
             self.label.image = self.photo2
