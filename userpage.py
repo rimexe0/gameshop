@@ -10,8 +10,8 @@ class userpage:
         userpage = CTk()
         userpage.title(("welcome " + str(user[0]['username'])))
 
-        width = userpage.winfo_screenwidth()
-        height = userpage.winfo_screenheight()
+        width = userpage.winfo_screenwidth()/1.5
+        height = userpage.winfo_screenheight()/1.2
         userpage.geometry("%dx%d" % (width, height))
         userpage.state('zoomed')
         userpage.resizable(False, False)

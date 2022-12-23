@@ -35,6 +35,7 @@ class Library(CTk):
             self.game = connector.returnStoredProcedure(stored_procedure, args)
             self.lib_gamelist()
             self.lib_game_preview()
+
         except Exception as e:
             print("getting games failed : ", e)
             print(traceback.format_exc())
@@ -59,19 +60,22 @@ class Library(CTk):
             print(traceback.format_exc())
 
     def lib_game_preview(self):
-        preview_1 = CTkFrame(self.game_preview, width=(self.width - 200), height=(self.height - (self.height - 300)))
-        preview_1.grid(row=0, column=0)
+        preview_top = CTkFrame(self.game_preview, width=(self.width - 224), height=(self.height - (self.height - 300)))
+        preview_bottom = CTkFrame(self.game_preview, width=(self.width - 224), height=self.height - (self.height - 300))
+        preview_top.grid(row=0, column=0)
+        preview_bottom.grid(row=1, column=0)
         try:
-            self.img_big = Image.showImage(preview_1, "https://rime.s-ul.eu/hwgjHinQ", 0, 0, 400, 400)
+            self.img_big = Image.showImage(preview_top, "https://rime.s-ul.eu/hwgjHinQ", 0, 0, 400, 400)
             self.game_name = CTkLabel(self.game_preview, text="Select a game", font=('Arial', 30))
             self.game_hours_played = CTkLabel(self.game_preview, text="")
-            self.game_last_played = CTkLabel(self.game_preview, text="",
-                                             font=('Arial', 15))
+            self.game_last_played = CTkLabel(self.game_preview, text="", font=('Arial', 15))
+            self.desc = CTkTextbox(preview_bottom, width=(self.width - 224), height=self.height - (self.height - 300))
 
             self.game_name.place(x=330, y=10)
             self.game_last_played.place(x=330, y=250)
             self.game_hours_played.place(x=330, y=270)
-            self.game_achievements(preview_1, self.game[1]['id'])
+            self.game_achievements(preview_top, self.game[1]['id'])
+            self.desc.place(x=0, y=0)
         except Exception as e:
             print("getting games failed : ", e)
             print(traceback.format_exc())
@@ -87,6 +91,8 @@ class Library(CTk):
             self.game_last_played.configure(text=("last played " + str(self.selected_game[0]['last_played'])),
                                             font=('Arial', 15))
             self.achievement_change_image(self.selected_game[0]['id'])
+            self.desc.delete("1.0", "end")
+            self.desc.insert("1.0", self.selected_game[0]['description'])
         except Exception as e:
             print("getting games failed : ", e)
             print(traceback.format_exc())
