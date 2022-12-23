@@ -27,18 +27,18 @@ def static_user(win, padx, pady, user_id):
         print(traceback.format_exc())
 
 
-def static_user_big(win, user_id):
-    userframe = CTkFrame(win, width=700, height=250)
+def static_user_big(win, vrow, vcol, user_id):
+    userframe = CTkFrame(win, width=700, height=250,fg_color="red")
     show_user_frame = CTkFrame(userframe, corner_radius=10, width=700, height=250)
     user_text = CTkFrame(show_user_frame, corner_radius=10, width=100, height=100)
     user_badge = CTkFrame(show_user_frame, corner_radius=10, width=200, height=70)
 
+    userframe.grid(row=vrow, column=vcol,sticky=E)
 
-
-    userframe.pack(anchor=CENTER)
     user_text.place(x=190, y=0)
-    show_user_frame.place(x=0, y=0)
-    user_badge.place(x=500, y=0)
+    show_user_frame.place(x=0, y=10)
+    user_badge.place(x=480, y=10)
+
 
     try:
         stored_procedure = "select_user_by_id"
@@ -47,24 +47,24 @@ def static_user_big(win, user_id):
         username = CTkLabel(user_text, text=user[0]['username'])
         username.configure(font=('Arial', 30))
         name = CTkLabel(user_text, text=user[0]['name'])
-        level = CTkLabel(user_text, text=("level : "+str( user[0]['level'])))
+        level = CTkLabel(user_text, text=("level : " + str(user[0]['level'])))
         image = Image.showImage(show_user_frame, user[0]['image'], 10, 10, 200, 200)
         desc = CTkTextbox(show_user_frame, width=500, height=100)
 
         badge_image = Image.showImage(user_badge, user[0]['badge_image'], 0, 0, 75, 75)
         badge_name = CTkLabel(user_badge, text=user[0]['badge_name'])
-        badge_xp = CTkLabel(user_badge,text=(str(user[0]['badge_xp'])+" xp"))
+        badge_xp = CTkLabel(user_badge, text=(str(user[0]['badge_xp']) + " xp"))
 
         desc.insert("0.0", user[0]['description'])
         desc.configure(state="disabled")
 
-        username.pack(padx=1, pady=1, anchor=NW)
-        name.pack(padx=1, pady=1, anchor=W)
-        level.pack(padx=1, pady=1, anchor=W)
+        username.pack(padx=2, pady=5, anchor=NW)
+        name.pack(padx=10, pady=5, anchor=W)
+        level.pack(padx=10, pady=10, anchor=W)
 
         desc.place(x=190, y=100)
-        badge_name.place(x=80,y=5)
-        badge_xp.place(x=80,y=30)
+        badge_name.place(x=80, y=5)
+        badge_xp.place(x=80, y=30)
         print(user)
 
 

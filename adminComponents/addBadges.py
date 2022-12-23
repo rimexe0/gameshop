@@ -71,7 +71,7 @@ def badge_user_frame(win, rowv, colv):
     badge_user_frame.grid(row=rowv, column=colv)
 
     def add_badge_to_user():
-        stored_procedure = "insert_user_badgesg,"
+        stored_procedure = "insert_badge_to_user,"
         args = [int(badge_id_entry.get()), str(username_entry.get())]
         print(args)
         connector.callStoredProcedure(stored_procedure, args)
