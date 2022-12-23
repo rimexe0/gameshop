@@ -74,7 +74,7 @@ def userpage_game(win, vrow, vcol, username):
         image = Image.showImage(show_game_frame, game[0]['image'], 0, 0, 150, 150)
         game_name.place(x=0, y=0)
         game_last_played.place(x=400, y=0)
-        game_hours_played.place(x=400, y=30)
+        game_hours_played.place(x=435, y=20)
         game_achievements(game_achievements_frame, game[0]['id'])
 
     except Exception as e:

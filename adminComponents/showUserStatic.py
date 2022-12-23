@@ -37,7 +37,7 @@ def static_user_big(win, vrow, vcol, user_id):
 
     user_text.place(x=190, y=0)
     show_user_frame.place(x=0, y=10)
-    user_badge.place(x=480, y=10)
+    user_badge.place(x=490, y=10)
 
 
     try:
