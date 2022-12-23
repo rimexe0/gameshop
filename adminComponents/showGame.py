@@ -35,16 +35,21 @@ def achievement_image(win, image, xv, yv):
 
 
 def game_achievements(win, game_id):
-    achievement_list = CTkFrame(win, width=200, height=50, fg_color="blue")
+    achievement_list = CTkFrame(win, width=200, height=50)
     achievement_list.place(x=0, y=0)
 
     try:
         stored_procedure = "select_achievements_by_game_id"
         args = [game_id]
         achievements = connector.returnStoredProcedure(stored_procedure, args)
-        achievement_image(achievement_list, achievements[0]['image'], 0, 5)
-        achievement_image(achievement_list, achievements[1]['image'], 60, 5)
-        achievement_image(achievement_list, achievements[2]['image'], 120, 5)
+        if not achievements:
+            print("no achievements")
+        else:
+            achievement_image(achievement_list, achievements[0]['image'], 0, 5)
+            achievement_image(achievement_list, achievements[1]['image'], 60, 5)
+            achievement_image(achievement_list, achievements[2]['image'], 120, 5)
+
+
 
 
     except Exception as e:
@@ -53,15 +58,15 @@ def game_achievements(win, game_id):
 
 
 def userpage_game(win, vrow, vcol, game):
-    game_frame = CTkFrame(win, width=700, height=120, fg_color="red", corner_radius=10)
-    show_game_frame = CTkFrame(game_frame, corner_radius=10, width=700, height=120, fg_color="yellow")
-    game_text = CTkFrame(show_game_frame, width=550, height=50, fg_color="green", corner_radius=10)
-    game_achievements_frame = CTkFrame(show_game_frame, width=200, height=50, corner_radius=10, fg_color="purple")
+    game_frame = CTkFrame(win, width=600, height=120, corner_radius=10)
+    show_game_frame = CTkFrame(game_frame, corner_radius=10, width=600, height=120)
+    game_text = CTkFrame(show_game_frame, width=550, height=50, corner_radius=10)
+    game_achievements_frame = CTkFrame(show_game_frame, width=200, height=50, corner_radius=10)
 
     game_frame.grid(row=vrow, column=vcol)
     show_game_frame.place(x=0, y=0)
-    game_text.place(x=140, y=10)
-    game_achievements_frame.place(x=490, y=65)
+    game_text.place(x=40, y=10)
+    game_achievements_frame.place(x=430, y=65)
 
     try:
 
@@ -69,7 +74,7 @@ def userpage_game(win, vrow, vcol, game):
         game_name.configure(font=('Arial', 30))
         game_last_played = CTkLabel(game_text, text=("last played " + str(game['last_played'])))
         game_hours_played = CTkLabel(game_text, text=str(game['hours_played']) + " hours played")
-        image = Image.showImage(show_game_frame, game['image'], 0, 0, 150, 150)
+        image = Image.showImage(show_game_frame, game['image'], 10, 10, 150, 150)
         game_name.place(x=0, y=0)
         game_last_played.place(x=400, y=0)
         game_hours_played.place(x=435, y=20)
@@ -81,7 +86,7 @@ def userpage_game(win, vrow, vcol, game):
 
 
 def userpage_game_list(win, vrow, vcol, username):
-    gamelist_frame = CTkFrame(win, width=700, height=700, fg_color="red", corner_radius=10)
+    gamelist_frame = CTkFrame(win, width=700, height=700, corner_radius=10)
 
     gamelist_frame.grid(row=vrow, column=vcol)
 

@@ -28,7 +28,7 @@ def static_user(win, padx, pady, user_id):
 
 
 def static_user_big(win, vrow, vcol, user_id):
-    userframe = CTkFrame(win, width=700, height=250,fg_color="red")
+    userframe = CTkFrame(win, width=700, height=250)
     show_user_frame = CTkFrame(userframe, corner_radius=10, width=700, height=250)
     user_text = CTkFrame(show_user_frame, corner_radius=10, width=100, height=100)
     user_badge = CTkFrame(show_user_frame, corner_radius=10, width=200, height=70)
