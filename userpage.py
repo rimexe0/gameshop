@@ -4,6 +4,7 @@ from customtkinter import *
 import gameshop.adminComponents.showUserStatic
 import gameshop.adminComponents.showGame
 import gameshop.library
+import gameshop.store
 
 class userpage:
     def user_page(user):
@@ -35,7 +36,8 @@ class userpage:
         gameshop.adminComponents.showGame.userpage_game_list(home_tab, 1, 1, user[0]['username'])
 
         # store tab components
-        gameshop.adminComponents.showGame.store_game(store_tab, 1)
+        # gameshop.adminComponents.showGame.store_game(store_tab, 1)
+        gameshop.store
 
         # library tab components
         lib= gameshop.library.Library(library_tab,width,height,user[0]['username'])

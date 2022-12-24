@@ -1,9 +1,7 @@
 import traceback
-
 from customtkinter import *
 from tkinter import *
 from tkinter import messagebox
-
 import gameshop.components.Image as Image
 import gameshop.connector as connector
 import gameshop.components.Image as Image
@@ -102,11 +100,10 @@ class Library(CTk):
             stored_procedure = "select_achievements_by_game_id"
             args = [game_id]
             achievements = connector.returnStoredProcedure(stored_procedure, args)
-            if not achievements:
-                self.a_image1.changeImage("https://rime.s-ul.eu/hwgjHinQ")
-                self.a_image2.changeImage("https://rime.s-ul.eu/hwgjHinQ")
-                self.a_image3.changeImage("https://rime.s-ul.eu/hwgjHinQ")
-            else:
+            self.a_image1.changeImage("https://rime.s-ul.eu/hwgjHinQ")
+            self.a_image2.changeImage("https://rime.s-ul.eu/hwgjHinQ")
+            self.a_image3.changeImage("https://rime.s-ul.eu/hwgjHinQ")
+            if achievements:
                 self.a_image1.changeImage(achievements[0]['image'])
                 self.a_image2.changeImage(achievements[1]['image'])
                 self.a_image3.changeImage(achievements[2]['image'])
