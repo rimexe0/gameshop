@@ -33,12 +33,11 @@ def static_user_big(win, vrow, vcol, user):
     user_text = CTkFrame(show_user_frame, corner_radius=10, width=100, height=100)
     user_badge = CTkFrame(show_user_frame, corner_radius=10, width=200, height=70)
 
-    userframe.grid(row=vrow, column=vcol,sticky=E)
+    userframe.grid(row=vrow, column=vcol, sticky=E)
 
     user_text.place(x=190, y=0)
     show_user_frame.place(x=0, y=10)
     user_badge.place(x=490, y=10)
-
 
     try:
         stored_procedure = "select_user_by_id"
@@ -67,7 +66,6 @@ def static_user_big(win, vrow, vcol, user):
         badge_xp.place(x=80, y=30)
         print(user)
 
-
     except Exception as e:
         print("getting user failed : ", e)
         print(traceback.format_exc())
@@ -82,8 +80,6 @@ def userlist(win, padx, pady):
         for i in all_users:
             print(i['id'])
             static_user(userList, 5, 5, all_users[i['id'] - 1]['id'])
-
-
 
     except Exception as e:
         print("getting user list failed : ", e)

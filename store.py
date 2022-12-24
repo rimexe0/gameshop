@@ -27,10 +27,10 @@ def store_game_button(win, xv, yv, game, user):
             print("adding game to user failed : ", e)
             print(traceback.format_exc())
 
-    if game['user_id'] == user[0]['id']:
-        add_to_lib_button = CTkButton(win, text="already added", command=btn_add_lib)
-    else:
-        add_to_lib_button = CTkButton(win, text="add to library", command=btn_add_lib)
+    # if game['user_id'] == user[0]['id']:
+    #     add_to_lib_button = CTkButton(win, text="already added", command=btn_add_lib)
+    # else:
+    add_to_lib_button = CTkButton(win, text="add to library", command=btn_add_lib)
 
     add_to_lib_button.place(x=xv, y=yv)
 
@@ -43,8 +43,8 @@ class StoreGame(CTk):
     def store_game_list(self, win, user):
 
         try:
-            stored_procedure = "select_all_games_by_user_id"
-            args = [user[0]['id']]
+            stored_procedure = "select_all_games"
+            args = []
             games = connector.returnStoredProcedure(stored_procedure, args)
         except Exception as e:
             print("getting games failed : ", e)

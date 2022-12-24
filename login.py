@@ -1,7 +1,9 @@
 from customtkinter import *
 import gameshop.sign_user as sign_user
 import gameshop.userpage as usergame
+import gameshop.AdminSettings as AdminSettings
 from tkinter import messagebox
+
 
 def LoginPage():
     set_default_color_theme("dark-blue")
@@ -18,19 +20,12 @@ def LoginPage():
     def Login():
         print(usernameEntry.get(), passwordEntry.get())
         try:
-            # credentials = sign_user.login(usernameEntry.get(), passwordEntry.get())
-            credentials = sign_user.login("rimexe", "1111")
-
+            credentials = sign_user.login(usernameEntry.get(), passwordEntry.get())
         except Exception as e:
-            messagebox.showerror("connection error","connection failed. Please check your internet")
+            messagebox.showerror("connection error", "connection failed. Please check your internet")
         else:
             login.destroy()
-            usergame.userpage.user_page(credentials)
-
-
-
-
-
+            usergame.Userpage.user_page(credentials)
 
     # components
 
@@ -46,8 +41,6 @@ def LoginPage():
     passwordEntry.grid(row=4, column=2)
     loginButton.grid(row=5, column=2, pady=(20, 0))
 
-
     # debug
-
 
     login.mainloop()

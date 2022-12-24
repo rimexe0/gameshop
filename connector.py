@@ -31,12 +31,10 @@ def callStoredProcedure(query, args):
     try:
         conn = connect()
         cur = conn.cursor()
-
         cur.callproc(query, args)
         data = cur.fetchall()
         if len(data) == 0:
             conn.commit()
-            print('query success!')
         else:
             print('error: ', str(data[0]))
     except Exception as e:
@@ -49,12 +47,9 @@ def returnStoredProcedure(query, args):
     try:
         conn = connect()
         cur = conn.cursor()
-
         cur.callproc(query, args)
         data = cur.fetchall()
-
         return data
-
     except Exception as e:
         print("returning stored procedure failed : {}".format(e))
     finally:

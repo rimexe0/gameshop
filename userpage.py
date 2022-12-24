@@ -5,9 +5,10 @@ import gameshop.adminComponents.showUserStatic
 import gameshop.adminComponents.showGame
 import gameshop.library
 import gameshop.store
+import gameshop.login
+import gameshop.AdminSettings
 
-
-class userpage:
+class Userpage:
     def user_page(user):
         userpage = CTk()
         userpage.title(("welcome " + str(user[0]['username'])))
@@ -21,8 +22,20 @@ class userpage:
         tabview = CTkTabview(userpage)
         tabview.grid(row=0, column=1)
 
+        def refresh():
+            lib.refresh()
+
+        def logout():
+            userpage.destroy()
+            gameshop.login.LoginPage()
+
         tabview.configure(corner_radius=30, width=width, height=height)
         tabview.grid_propagate(0)
+        refresh_button = CTkButton(userpage, text="refresh", command=refresh, width=30)
+        logout_button = CTkButton(userpage, text="logout", command=logout, width=30)
+        refresh_button.place(x=10, y=10)
+        logout_button.place(x=70, y=10)
+        # gameshop.AdminSettings.adminbtn(userpage)
 
         home_tab = tabview.add("Home")
         library_tab = tabview.add("Library")
@@ -42,6 +55,5 @@ class userpage:
 
         # library tab components
         lib = gameshop.library.Library(library_tab, width, height, user)
-
 
         userpage.mainloop()

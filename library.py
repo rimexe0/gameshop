@@ -1,8 +1,6 @@
 import traceback
 from customtkinter import *
 from tkinter import *
-from tkinter import messagebox
-import gameshop.components.Image as Image
 import gameshop.connector as connector
 import gameshop.components.Image as Image
 
@@ -10,6 +8,7 @@ import gameshop.components.Image as Image
 class Library(CTk):
     def __init__(self, win, width, height, user, **kwargs):
         super().__init__(**kwargs)
+        self.desc = None
         self.listbox = Listbox
         self.a_image1 = Image
         self.a_image2 = Image
@@ -24,13 +23,12 @@ class Library(CTk):
         self.gamelist = CTkFrame(win, width=self.width - (self.width - 200), height=self.height)
         self.game_preview = CTkFrame(win, width=(self.width - 200), height=self.height)
         self.listbox = Listbox(self.gamelist, width=30, height=100, selectmode=SINGLE)
-        refresh_button = CTkButton(self.gamelist, text="refresh", command=self.refresh)
 
         self.gamelist.grid(row=0, column=0)
         self.game_preview.grid(row=0, column=1, sticky="N")
         self.gamelist.grid_propagate(0)
         self.game_preview.grid_propagate(0)
-        refresh_button.place(x=0,y=0)
+
         try:
             stored_procedure = "select_user_game_by_username"
             args = [self.user[0]['username']]
@@ -130,11 +128,17 @@ class Library(CTk):
             print(traceback.format_exc())
 
     def refresh(self):
-        game_stored_procedure = "select_user_game_by_username"
-        achievement_stored_procedure = "select_achievements_by_game_id"
-        game_args = [self.user[0]['username']]
-        achievement_args = [self.game[0]['id']]
-        self.game = connector.returnStoredProcedure(game_stored_procedure, game_args)
-        achievements = connector.returnStoredProcedure(achievement_stored_procedure, achievement_args)
-        self.lib_gamelist()
-        print("refreshed")
+        try:
+            game_stored_procedure = "select_user_game_by_username"
+            game_args = [self.user[0]['username']]
+            self.game = connector.returnStoredProcedure(game_stored_procedure, game_args)
+            self.lib_gamelist()
+        except Exception as e:
+            print("refresh failed failed : ", e)
+            print(traceback.format_exc())
+        else:
+            print("refreshed")
+
+
+
+
