@@ -8,12 +8,13 @@ import gameshop.components.Image as Image
 
 
 class Library(CTk):
-    def __init__(self, win, width, height, username, **kwargs):
+    def __init__(self, win, width, height, user, **kwargs):
         super().__init__(**kwargs)
+        self.listbox = Listbox
         self.a_image1 = Image
         self.a_image2 = Image
         self.a_image3 = Image
-        self.username = username
+        self.user = user
         self.width = width
         self.height = height
         self.img_big = Image
@@ -22,14 +23,17 @@ class Library(CTk):
         self.game_last_played = 0
         self.gamelist = CTkFrame(win, width=self.width - (self.width - 200), height=self.height)
         self.game_preview = CTkFrame(win, width=(self.width - 200), height=self.height)
+        self.listbox = Listbox(self.gamelist, width=30, height=100, selectmode=SINGLE)
+        refresh_button = CTkButton(self.gamelist, text="refresh", command=self.refresh)
 
         self.gamelist.grid(row=0, column=0)
         self.game_preview.grid(row=0, column=1, sticky="N")
         self.gamelist.grid_propagate(0)
         self.game_preview.grid_propagate(0)
+        refresh_button.place(x=0,y=0)
         try:
             stored_procedure = "select_user_game_by_username"
-            args = [self.username]
+            args = [self.user[0]['username']]
             self.game = connector.returnStoredProcedure(stored_procedure, args)
             self.lib_gamelist()
             self.lib_game_preview()
@@ -48,7 +52,7 @@ class Library(CTk):
         self.listbox.bind('<<ListboxSelect>>', items_selected)
 
     def lib_gamelist(self):
-        self.listbox = Listbox(self.gamelist, width=30, height=100, selectmode=SINGLE)
+        self.listbox.delete(0, END)
         try:
             for i in self.game:
                 self.listbox.insert(i['id'], i['name'])
@@ -72,7 +76,7 @@ class Library(CTk):
             self.game_name.place(x=330, y=10)
             self.game_last_played.place(x=330, y=250)
             self.game_hours_played.place(x=330, y=270)
-            self.game_achievements(preview_top, self.game[1]['id'])
+            self.game_achievements(preview_top)
             self.desc.place(x=0, y=0)
         except Exception as e:
             print("getting games failed : ", e)
@@ -81,7 +85,7 @@ class Library(CTk):
     def lib_change_game(self, gamename):
         try:
             stored_procedure = "select_user_game_by_username_and_game_name"
-            args = [self.username, gamename]
+            args = [self.user[0]['username'], gamename]
             self.selected_game = connector.returnStoredProcedure(stored_procedure, args)
             self.img_big.changeImage(self.selected_game[0]['image'])
             self.game_name.configure(text=self.selected_game[0]['name'])
@@ -112,7 +116,7 @@ class Library(CTk):
             print("fun fact you broke something : ", e)
             print(traceback.format_exc())
 
-    def game_achievements(self, win, game_id):
+    def game_achievements(self, win):
         achievement_list = CTkFrame(win, width=200, height=50)
         achievement_list.place(x=self.width - 450, y=230)
 
@@ -124,3 +128,13 @@ class Library(CTk):
         except Exception as e:
             print("getting achievements failed : ", e)
             print(traceback.format_exc())
+
+    def refresh(self):
+        game_stored_procedure = "select_user_game_by_username"
+        achievement_stored_procedure = "select_achievements_by_game_id"
+        game_args = [self.user[0]['username']]
+        achievement_args = [self.game[0]['id']]
+        self.game = connector.returnStoredProcedure(game_stored_procedure, game_args)
+        achievements = connector.returnStoredProcedure(achievement_stored_procedure, achievement_args)
+        self.lib_gamelist()
+        print("refreshed")

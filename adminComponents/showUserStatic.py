@@ -27,7 +27,7 @@ def static_user(win, padx, pady, user_id):
         print(traceback.format_exc())
 
 
-def static_user_big(win, vrow, vcol, user_id):
+def static_user_big(win, vrow, vcol, user):
     userframe = CTkFrame(win, width=700, height=250)
     show_user_frame = CTkFrame(userframe, corner_radius=10, width=700, height=250)
     user_text = CTkFrame(show_user_frame, corner_radius=10, width=100, height=100)
@@ -42,7 +42,7 @@ def static_user_big(win, vrow, vcol, user_id):
 
     try:
         stored_procedure = "select_user_by_id"
-        args = [user_id]
+        args = [user[0]['id']]
         user = connector.returnStoredProcedure(stored_procedure, args)
         username = CTkLabel(user_text, text=user[0]['username'])
         username.configure(font=('Arial', 30))

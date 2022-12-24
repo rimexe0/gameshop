@@ -1,15 +1,10 @@
 import pymysql
 
 hostName = "localhost"
-
 userName = "root"
-
 userPassword = ""
-
 databaseName = "gameshop"
-
 databaseCharset = "utf8mb4"
-
 cusrorType = pymysql.cursors.DictCursor
 
 
@@ -41,7 +36,7 @@ def callStoredProcedure(query, args):
         data = cur.fetchall()
         if len(data) == 0:
             conn.commit()
-            print('User information saved successfully !')
+            print('query success!')
         else:
             print('error: ', str(data[0]))
     except Exception as e:
@@ -66,13 +61,3 @@ def returnStoredProcedure(query, args):
         conn.close()
 
 
-def ded(query):
-    try:
-        cursor = connect()
-        cursor.execute(query)
-        for result in cursor.fetchall():
-            return result
-    except Exception as e:
-        print("query failed : {}".format(e))
-    finally:
-        cursor.close()

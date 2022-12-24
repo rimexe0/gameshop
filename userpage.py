@@ -6,13 +6,14 @@ import gameshop.adminComponents.showGame
 import gameshop.library
 import gameshop.store
 
+
 class userpage:
     def user_page(user):
         userpage = CTk()
         userpage.title(("welcome " + str(user[0]['username'])))
 
-        width = userpage.winfo_screenwidth()/1.5
-        height = userpage.winfo_screenheight()/1.2
+        width = userpage.winfo_screenwidth() / 1.3
+        height = userpage.winfo_screenheight() / 1.2
         userpage.geometry("%dx%d" % (width, height))
         userpage.state('zoomed')
         userpage.resizable(False, False)
@@ -27,19 +28,20 @@ class userpage:
         library_tab = tabview.add("Library")
         store_tab = tabview.add("Store")
 
-        home_tab.configure( width=770, height=height)
+        home_tab.configure(width=770, height=height)
         home_tab.grid_columnconfigure(0, weight=1)
         home_tab.grid_columnconfigure(2, weight=1)
 
         # home tab components
-        gameshop.adminComponents.showUserStatic.static_user_big(home_tab, 0, 1, user[0]['id'])
-        gameshop.adminComponents.showGame.userpage_game_list(home_tab, 1, 1, user[0]['username'])
+        gameshop.adminComponents.showUserStatic.static_user_big(home_tab, 0, 1, user)
+        gameshop.adminComponents.showGame.userpage_game_list(home_tab, 1, 1, user)
 
         # store tab components
         # gameshop.adminComponents.showGame.store_game(store_tab, 1)
-        gameshop.store
+        store = gameshop.store.Store(store_tab, width, height, user)
 
         # library tab components
-        lib= gameshop.library.Library(library_tab,width,height,user[0]['username'])
+        lib = gameshop.library.Library(library_tab, width, height, user)
+
 
         userpage.mainloop()
