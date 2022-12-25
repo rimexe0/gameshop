@@ -15,6 +15,7 @@ def LoginPage():
     login.minsize(400, 500)
     login.grid_columnconfigure(0, weight=1)
     login.grid_columnconfigure(3, weight=1)
+    login.iconbitmap("gameshop/logo.ico")
 
     # functions
     def Login():
@@ -22,7 +23,7 @@ def LoginPage():
         try:
             credentials = sign_user.login(usernameEntry.get(), passwordEntry.get())
         except Exception as e:
-            messagebox.showerror("connection error", "connection failed. Please check your internet")
+            messagebox.showerror("login error", "login failed. Please check your credentials.")
         else:
             login.destroy()
             usergame.Userpage.user_page(credentials)

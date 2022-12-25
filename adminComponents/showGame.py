@@ -31,7 +31,7 @@ def game_achievements(win, game_id, user_id):
 
 
 def userpage_game(win, vrow, vcol, game, user):
-    game_frame = CTkFrame(win, width=600, height=120, corner_radius=10)
+    game_frame = CTkFrame(win, width=650, height=120, corner_radius=10)
     show_game_frame = CTkFrame(game_frame, corner_radius=10, width=580, height=135, fg_color="#2b2b2b")
     game_text = CTkFrame(show_game_frame, width=450, height=50, corner_radius=10, fg_color="#2b2b2b")
     game_achievements_frame = CTkFrame(show_game_frame, width=200, height=50, corner_radius=10, fg_color="#2b2b2b")
@@ -49,8 +49,8 @@ def userpage_game(win, vrow, vcol, game, user):
         game_hours_played = CTkLabel(game_text, text=str(game['hours_played']) + " hours played")
         image = Image.showImage(show_game_frame, game['image'], 10, 10, 130, 130)
         game_name.place(x=0, y=0)
-        game_last_played.place(x=300, y=0)
-        game_hours_played.place(x=335, y=20)
+        game_last_played.place(x=290, y=0)
+        game_hours_played.place(x=290, y=20)
         game_achievements(game_achievements_frame, game['id'], user[0]['id'])
 
     except Exception as e:
@@ -59,7 +59,7 @@ def userpage_game(win, vrow, vcol, game, user):
 
 
 def userpage_game_list(win, vrow, vcol, user):
-    gamelist_frame = CTkFrame(win, width=700, height=700, corner_radius=10, fg_color="#212121")
+    gamelist_frame = CTkFrame(win, width=800, height=700, corner_radius=10, fg_color="#212121")
 
     gamelist_frame.grid(row=vrow, column=vcol)
 

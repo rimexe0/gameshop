@@ -77,5 +77,5 @@ def achievement_user_frame(win, rowv, colv):
     CTkLabel(achievement_user_frame, text="game id").grid(row=3, column=0)
     game_id_entry.grid(row=4, column=0, padx=0, pady=0)
     CTkLabel(achievement_user_frame, text="username").grid(row=5, column=0)
-    username_entry.grid(row=6, column=0, padx=0, pady=0)
+    user_id_entry.grid(row=6, column=0, padx=0, pady=0)
     add_achievement_button.grid(row=7, column=0, padx=5, pady=5)

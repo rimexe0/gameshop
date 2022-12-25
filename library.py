@@ -65,7 +65,7 @@ class Library(CTk):
         preview_top.grid(row=0, column=0)
         preview_bottom.grid(row=1, column=0)
         try:
-            self.img_big = Image.showImage(preview_top, "https://rime.s-ul.eu/hwgjHinQ", 0, 0, 400, 400)
+            self.img_big = Image.showImage(preview_top, "https://rime.s-ul.eu/hwgjHinQ", 0, 0, 350, 350)
             self.game_name = CTkLabel(self.game_preview, text="Select a game", font=('Arial', 30))
             self.game_hours_played = CTkLabel(self.game_preview, text="")
             self.game_last_played = CTkLabel(self.game_preview, text="", font=('Arial', 15))
@@ -90,17 +90,17 @@ class Library(CTk):
             self.game_hours_played.configure(text=str(self.selected_game[0]['hours_played']) + " hours played")
             self.game_last_played.configure(text=("last played " + str(self.selected_game[0]['last_played'])),
                                             font=('Arial', 15))
-            self.achievement_change_image(self.selected_game[0]['id'])
+            self.achievement_change_image(self.selected_game[0]['id'],self.user[0]['id'])
             self.desc.delete("1.0", "end")
             self.desc.insert("1.0", self.selected_game[0]['description'])
         except Exception as e:
             print("getting games failed : ", e)
             print(traceback.format_exc())
 
-    def achievement_change_image(self, game_id):
+    def achievement_change_image(self, game_id,user_id):
         try:
             stored_procedure = "select_achievements_by_game_id"
-            args = [game_id]
+            args = [game_id, user_id]
             achievements = connector.returnStoredProcedure(stored_procedure, args)
             self.a_image1.changeImage("https://rime.s-ul.eu/hwgjHinQ")
             self.a_image2.changeImage("https://rime.s-ul.eu/hwgjHinQ")

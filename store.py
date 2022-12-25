@@ -49,14 +49,14 @@ class StoreGame(CTk):
         except Exception as e:
             print("getting games failed : ", e)
             print(traceback.format_exc())
-        k = 0
-        j = 0
+        row = 0
+        col = 0
         for i in games:
             if i['id'] % 3 == 1:
-                j += 1
-                k = 0
-            self.store_game(win, i, user, j, k)
-            k += 1
+                col += 1
+                row = 0
+            self.store_game(win, i, user, col, row)
+            row += 1
 
     def store_game(self, win, game, user, xv, yv):
         game_frame = CTkFrame(win, width=350, height=140, corner_radius=10, fg_color="#1e1e1e")
