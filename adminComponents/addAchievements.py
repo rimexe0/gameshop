@@ -25,7 +25,7 @@ def achievement_list(win, rowv, colv):
     cb_achievements = ["available achievements"]
     achievements = connector.returnStoredProcedure("select_all_achievements", "")
     for i in achievements:
-        cb_achievements.append(i['name'])
+        cb_achievements.append(str(i['id']) + " " + str(i['name']))
     achievement_optionMenu = CTkOptionMenu(win, values=cb_achievements, command=selected_achievement)
     achievement_optionMenu.grid(row=rowv, column=colv, padx=5, pady=5)
     delete_button = CTkButton(win, text="delete achievement", command=deleteAchievementBtn)
@@ -61,12 +61,12 @@ def achievement_user_frame(win, rowv, colv):
 
     def add_achievement_to_user():
         stored_procedure = "insert_achievements_to_user"
-        args = [str(username_entry.get()), achievement_id_entry.get(), game_id_entry.get()]
+        args = [user_id_entry.get(), game_id_entry.get(), achievement_id_entry.get()]
         print(args)
         connector.callStoredProcedure(stored_procedure, args)
 
     achievement_id_entry = CTkEntry(achievement_user_frame)
-    username_entry = CTkEntry(achievement_user_frame)
+    user_id_entry = CTkEntry(achievement_user_frame)
     game_id_entry = CTkEntry(achievement_user_frame)
     add_achievement_button = CTkButton(achievement_user_frame, text="add achievement to user",
                                        command=add_achievement_to_user)

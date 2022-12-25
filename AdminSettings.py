@@ -16,7 +16,7 @@ def admin_page():
     win = CTk()
     # window settings
     win.title("login")
-    width = win.winfo_screenwidth() 
+    width = win.winfo_screenwidth()
     height = win.winfo_screenheight()
     win.geometry("%dx%d" % (width, height))
     win.state('zoomed')
@@ -49,7 +49,5 @@ def admin_page():
 
 
 def adminbtn(win):
-    admin_button = CTkButton(win, text="logout", command=admin_page, width=30)
+    admin_button = CTkButton(win, text="admin", command=admin_page, width=30)
     admin_button.place(x=140, y=10)
-
-admin_page()

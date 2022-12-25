@@ -20,8 +20,8 @@ class Library(CTk):
         self.game_name = 0
         self.game_hours_played = 0
         self.game_last_played = 0
-        self.gamelist = CTkFrame(win, width=self.width - (self.width - 200), height=self.height)
-        self.game_preview = CTkFrame(win, width=(self.width - 200), height=self.height)
+        self.gamelist = CTkFrame(win, width=self.width - (self.width - 200), height=self.height,fg_color="#1e1e1e")
+        self.game_preview = CTkFrame(win, width=(self.width - 200), height=self.height,fg_color="#1e1e1e")
         self.listbox = Listbox(self.gamelist, width=30, height=100, selectmode=SINGLE)
 
         self.gamelist.grid(row=0, column=0)
@@ -60,8 +60,8 @@ class Library(CTk):
             print(traceback.format_exc())
 
     def lib_game_preview(self):
-        preview_top = CTkFrame(self.game_preview, width=(self.width - 224), height=(self.height - (self.height - 300)))
-        preview_bottom = CTkFrame(self.game_preview, width=(self.width - 224), height=self.height - (self.height - 300))
+        preview_top = CTkFrame(self.game_preview, width=(self.width - 224), height=(self.height - (self.height - 300)),fg_color="#1e1e1e")
+        preview_bottom = CTkFrame(self.game_preview, width=(self.width - 224), height=self.height - (self.height - 300),fg_color="#1e1e1e")
         preview_top.grid(row=0, column=0)
         preview_bottom.grid(row=1, column=0)
         try:
@@ -69,7 +69,7 @@ class Library(CTk):
             self.game_name = CTkLabel(self.game_preview, text="Select a game", font=('Arial', 30))
             self.game_hours_played = CTkLabel(self.game_preview, text="")
             self.game_last_played = CTkLabel(self.game_preview, text="", font=('Arial', 15))
-            self.desc = CTkTextbox(preview_bottom, width=(self.width - 224), height=self.height - (self.height - 300))
+            self.desc = CTkTextbox(preview_bottom, width=(self.width - 224), height=self.height - (self.height - 300),fg_color="#1e1e1e")
 
             self.game_name.place(x=330, y=10)
             self.game_last_played.place(x=330, y=250)
@@ -115,7 +115,7 @@ class Library(CTk):
             print(traceback.format_exc())
 
     def game_achievements(self, win):
-        achievement_list = CTkFrame(win, width=200, height=50)
+        achievement_list = CTkFrame(win, width=200, height=50,fg_color="#1e1e1e")
         achievement_list.place(x=self.width - 450, y=230)
 
         try:

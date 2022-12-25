@@ -29,13 +29,13 @@ class Userpage:
             userpage.destroy()
             gameshop.login.LoginPage()
 
-        tabview.configure(corner_radius=30, width=width, height=height)
+        tabview.configure(corner_radius=30, width=width, height=height,fg_color="#212121")
         tabview.grid_propagate(0)
         refresh_button = CTkButton(userpage, text="refresh", command=refresh, width=30)
         logout_button = CTkButton(userpage, text="logout", command=logout, width=30)
         refresh_button.place(x=10, y=10)
         logout_button.place(x=70, y=10)
-        # gameshop.AdminSettings.adminbtn(userpage)
+        gameshop.AdminSettings.adminbtn(userpage)
 
         home_tab = tabview.add("Home")
         library_tab = tabview.add("Library")

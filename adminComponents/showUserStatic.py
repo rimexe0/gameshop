@@ -28,16 +28,16 @@ def static_user(win, padx, pady, user_id):
 
 
 def static_user_big(win, vrow, vcol, user):
-    userframe = CTkFrame(win, width=700, height=250)
-    show_user_frame = CTkFrame(userframe, corner_radius=10, width=700, height=250)
-    user_text = CTkFrame(show_user_frame, corner_radius=10, width=100, height=100)
-    user_badge = CTkFrame(show_user_frame, corner_radius=10, width=200, height=70)
+    userframe = CTkFrame(win, width=700, height=200,fg_color="#212121")
+    show_user_frame = CTkFrame(userframe, corner_radius=10, width=700, height=200,fg_color="#212121")
+    user_text = CTkFrame(show_user_frame, corner_radius=10, width=100, height=100,fg_color="#212121")
+    user_badge = CTkFrame(show_user_frame, corner_radius=10, width=200, height=65,fg_color="#2b2b2b")
 
     userframe.grid(row=vrow, column=vcol, sticky=E)
 
     user_text.place(x=190, y=0)
     show_user_frame.place(x=0, y=10)
-    user_badge.place(x=490, y=10)
+    user_badge.place(x=490, y=13)
 
     try:
         stored_procedure = "select_user_by_id"
@@ -48,7 +48,7 @@ def static_user_big(win, vrow, vcol, user):
         name = CTkLabel(user_text, text=user[0]['name'])
         level = CTkLabel(user_text, text=("level : " + str(user[0]['level'])))
         image = Image.showImage(show_user_frame, user[0]['image'], 10, 10, 200, 200)
-        desc = CTkTextbox(show_user_frame, width=500, height=100)
+        desc = CTkTextbox(show_user_frame, width=500, height=80,fg_color="#2b2b2b")
 
         badge_image = Image.showImage(user_badge, user[0]['badge_image'], 0, 0, 75, 75)
         badge_name = CTkLabel(user_badge, text=user[0]['badge_name'])
@@ -72,7 +72,7 @@ def static_user_big(win, vrow, vcol, user):
 
 
 def userlist(win, padx, pady):
-    userList = CTkFrame(win)
+    userList = CTkFrame(win,fg_color="#212121")
     userList.pack(padx=padx, pady=pady, anchor=W)
     try:
         stored_procedure = "select_all_users"

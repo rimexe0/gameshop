@@ -11,7 +11,7 @@ class Store(CTk):
         super().__init__(**kwargs)
         self.width = width
         self.height = height
-        self.store_page = CTkFrame(win, width=self.width - 80, height=self.height - 120, fg_color="red")
+        self.store_page = CTkFrame(win, width=self.width - 80, height=self.height - 120, fg_color="#1e1e1e")
 
         self.store_page.grid(row=0, column=0)
         StoreGame(self.store_page, user, **kwargs)
@@ -30,7 +30,7 @@ def store_game_button(win, xv, yv, game, user):
     # if game['user_id'] == user[0]['id']:
     #     add_to_lib_button = CTkButton(win, text="already added", command=btn_add_lib)
     # else:
-    add_to_lib_button = CTkButton(win, text="add to library", command=btn_add_lib)
+    add_to_lib_button = CTkButton(win, text="add to library", command=btn_add_lib,width=50)
 
     add_to_lib_button.place(x=xv, y=yv)
 
@@ -59,9 +59,9 @@ class StoreGame(CTk):
             k += 1
 
     def store_game(self, win, game, user, xv, yv):
-        game_frame = CTkFrame(win, width=350, height=140, corner_radius=10)
-        show_game_frame = CTkFrame(game_frame, corner_radius=10, width=350, height=140)
-        game_text = CTkFrame(show_game_frame, width=400, height=200)
+        game_frame = CTkFrame(win, width=350, height=140, corner_radius=10, fg_color="#1e1e1e")
+        show_game_frame = CTkFrame(game_frame, corner_radius=10, width=350, height=140, fg_color="#1e1e1e")
+        game_text = CTkFrame(show_game_frame, width=400, height=200, fg_color="#1e1e1e")
 
         game_frame.grid(row=xv, column=yv)
         show_game_frame.place(x=0, y=0)
@@ -71,15 +71,15 @@ class StoreGame(CTk):
 
             game_name = CTkLabel(game_text, text=game['name'], wraplength=200)
             game_name.configure(font=('Arial', 20))
-            if game['price'] <= 0:
-                game_price = CTkLabel(game_text, text="Fiyat : Free")
-            else:
-                game_price = CTkLabel(game_text, text="Fiyat : " + str(game['price']) + " ₺")
+            # if game['price'] <= 0:
+            #     game_price = CTkLabel(game_text, text="Fiyat : Free")
+            # else:
+            game_price = CTkLabel(game_frame, text="Fiyat : " + str(game['price']) + " ₺")
 
             image = Image.showImage(show_game_frame, game['image'], 10, 10, 150, 150)
             game_name.pack(padx=10, pady=10, anchor=W)
-            game_price.pack(padx=0, pady=2, anchor=E)
-            store_game_button(game_frame, 200, 100, game, user)
+            game_price.place(x=160,y=100)
+            store_game_button(game_frame, 250, 100, game, user)
         except Exception as e:
             print("getting game failed : ", e)
             print(traceback.format_exc())
