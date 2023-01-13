@@ -1,6 +1,6 @@
 from customtkinter import *
 from tkinter import messagebox
-import gameshop.connector as connector
+import gameshop.components.connector as connector
 
 
 def deleteAchievement(achievement_name):

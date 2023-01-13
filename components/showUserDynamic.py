@@ -1,7 +1,7 @@
 from customtkinter import *
 from tkinter import *
 from tkinter import messagebox
-import gameshop.connector as connector
+import gameshop.components.connector as connector
 import gameshop.components.Image as Image
 
 

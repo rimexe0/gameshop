@@ -1,5 +1,5 @@
 from customtkinter import *
-import gameshop.connector as connector
+import gameshop.components.connector as connector
 
 
 def game_frame(win, rowv, colv):

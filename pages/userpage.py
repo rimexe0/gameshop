@@ -1,10 +1,11 @@
 from customtkinter import *
-import gameshop.adminComponents.showUserStatic as ShowUser
+import gameshop.components.showUserStatic as ShowUser
 import gameshop.adminComponents.showGame as ShowGame
-import gameshop.library as UserLibrary
-import gameshop.store as Store
-import gameshop.login as Login
-import gameshop.about
+import gameshop.pages.library as UserLibrary
+import gameshop.pages.about
+import gameshop.pages.store as Store
+import gameshop.pages.login as login
+
 
 class Userpage:
     def user_page(user):
@@ -26,20 +27,20 @@ class Userpage:
 
         def logout():
             userpage.destroy()
-            Login.LoginPage()
+            login.LoginPage()
 
         def AboutPage():
-            gameshop.about.AboutPage()
+            gameshop.pages.about.AboutPage()
 
-        tabview.configure(corner_radius=30, width=width, height=height,fg_color="#212121")
+        tabview.configure(corner_radius=30, width=width, height=height, fg_color="#212121")
         tabview.grid_propagate(0)
         refresh_button = CTkButton(userpage, text="refresh", command=refresh, width=30)
         logout_button = CTkButton(userpage, text="logout", command=logout, width=30)
-        aboutButton = CTkButton(userpage, text="about", command=AboutPage,width=30)
+        aboutButton = CTkButton(userpage, text="about", command=AboutPage, width=30)
 
         refresh_button.place(x=10, y=10)
         logout_button.place(x=70, y=10)
-        aboutButton.place(x=130,y=10)
+        aboutButton.place(x=130, y=10)
         # gameshop.AdminSettings.adminbtn(userpage)
 
         home_tab = tabview.add("Home")

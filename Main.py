@@ -1,7 +1,4 @@
-import gameshop.login
-import gameshop.userpage
+import gameshop.pages.login
+import gameshop.pages.userpage
 
-if 5 > 3:
-    gameshop.login.LoginPage()
-
-
+gameshop.pages.login.LoginPage()

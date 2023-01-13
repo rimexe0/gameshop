@@ -1,9 +1,9 @@
 from customtkinter import *
-import gameshop.connector as connector
+import gameshop.components.connector as connector
 
 
 def frame(win, rowv, colv):
-    add_user_frame = CTkFrame(win)
+    add_user_frame = CTkFrame(win, fg_color="#1a1a1a")
     add_user_frame.grid( row=rowv, column=colv)
 
     def add_user():
@@ -19,9 +19,9 @@ def frame(win, rowv, colv):
     name_entry = CTkEntry(add_user_frame)
     desc_entry = CTkEntry(add_user_frame)
     image_entry = CTkEntry(add_user_frame)
-    add_user_button = CTkButton(add_user_frame, text="add user", command=add_user)
+    add_user_button = CTkButton(add_user_frame, text="Register", command=add_user)
 
-    CTkLabel(add_user_frame,text="Add User",font=("Arial",30)).grid(row=0,column=0)
+    CTkLabel(add_user_frame,text="Register",font=("Arial",30)).grid(row=0,column=0)
     CTkLabel(add_user_frame, text="user id").grid(row=1, column=0)
     id_entry.grid(row=2, column=0, padx=0, pady=0)
     CTkLabel(add_user_frame, text="username").grid(row=3, column=0)

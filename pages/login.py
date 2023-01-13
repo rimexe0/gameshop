@@ -1,9 +1,9 @@
 from customtkinter import *
-import gameshop.sign_user as sign_user
-import gameshop.userpage as usergame
-import gameshop.AdminSettings as AdminSettings
+import gameshop.adminComponents.sign_user as sign_user
+import gameshop.pages.userpage as usergame
 from tkinter import messagebox
-import gameshop.about
+import gameshop.pages.about
+import gameshop.pages.register as registerPage
 
 
 def LoginPage():
@@ -23,14 +23,20 @@ def LoginPage():
         print(usernameEntry.get(), passwordEntry.get())
         try:
             credentials = sign_user.login(usernameEntry.get(), passwordEntry.get())
+            if credentials is None:
+                messagebox.showerror("login error", "login failed. Please check your credentials.")
+            else:
+                login.destroy()
+                usergame.Userpage.user_page(credentials)
+
         except Exception as e:
-            messagebox.showerror("login error", "login failed. Please check your credentials.")
-        else:
-            login.destroy()
-            usergame.Userpage.user_page(credentials)
+            messagebox.showerror("connection error", "login failed. Please check your connection")
 
     def AboutPage():
-        gameshop.about.AboutPage()
+        gameshop.pages.about.AboutPage()
+
+    def register():
+        registerPage.RegisterPage()
 
     # components
 
@@ -40,13 +46,15 @@ def LoginPage():
     CTkLabel(login, text="password").grid(row=3, column=2, pady=(0, 0))
     passwordEntry = CTkEntry(login, show="*")
     loginButton = CTkButton(login, text="login", command=Login)
+    registerButton = CTkButton(login, text="register", command=register)
     aboutButton = CTkButton(login, text="about", command=AboutPage)
 
     # layout
     usernameEntry.grid(row=1, column=2)
     passwordEntry.grid(row=4, column=2)
     loginButton.grid(row=5, column=2, pady=(20, 0))
-    aboutButton.grid(row=6,column=2,pady=20)
+    registerButton.grid(row=6, column=2, pady=(20, 0))
+    aboutButton.grid(row=7, column=2, pady=20)
 
     # debug
 
