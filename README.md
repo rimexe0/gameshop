@@ -9,3 +9,6 @@ customTkinter didin't had some components i need so i imported both of them.
 # install 
 
 you need to install tkinter,customTkinter,pymysql and PIL.
+
+## TODO
+i should also add the db schema so it can actually be usable.
